@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/userSlice';
+import { logout } from '../redux/slices/userSlice';
 
 export default function HomeScreen() {
   const user = useSelector(state => state.user.currentUser);
