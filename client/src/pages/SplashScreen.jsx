@@ -1,27 +1,45 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 
 export default function SplashScreen({ navigation }) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigation.replace('Login');
-    }, 2000); // 2 שניות לספלאש
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      {/* תחליף את זה בלוגו שלך */}
-      {/* <Image source={require('../assets/logo.png')} style={styles.logo} /> */}
-      
-      <Text style={styles.text}>ברוך הבא לאפליקציית תיווך הספורט!</Text>
-    </View>
+    <ImageBackground
+      source={require('../../assets/enterimg.jpg')} 
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>SPORTS</Text>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor:"red" },
-  logo: { width: 150, height: 150, marginBottom: 20 },
-  text: { fontSize: 18, fontWeight: 'bold' },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerContainer: {
+    position: 'absolute',
+    top: 400,
+    left: 0,
+    right: 0,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: 50,
+    color: '#fff',
+  },
 });

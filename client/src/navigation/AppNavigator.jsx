@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SplashScreen from '../pages/SplashScreen';
 import LoginScreen from '../pages/LoginScreen';
-import HomeScreen from '../pages/HomeScreen';
-
-const Stack = createNativeStackNavigator();
+import ClientNavigator from './ClientNavigator';
+import ClubNavigator from './ClubNavigator';
 
 export default function AppNavigator({ user }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setLoading(false);
+    };
+    checkAuth();
+  }, []);
+
+  if (loading) return <SplashScreen />;
+
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {!user ? (
-          <>
-            <Stack.Screen name="Splash" component={SplashScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-          </>
-        ) : (
-          <Stack.Screen name="Home" component={HomeScreen} />
-        )}
-      </Stack.Navigator>
+      {!user ? (
+        <LoginScreen />
+      ) : user.role === 'club' ? (
+        <ClubNavigator />
+      ) : user.role === 'client' ? (
+        <ClientNavigator />
+      ) : (
+        <LoginScreen /> 
+      )}
     </NavigationContainer>
   );
 }

@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/slices/userSlice';
+import { logout } from '../../redux/slices/userSlice';
 
-export default function HomeScreen() {
+export default function ClubHomeScreen() {
   const user = useSelector(state => state.user.currentUser);
   const [UserData,setUserData] = useState([{}])
   const dispatch = useDispatch();
-
+  
 
 
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.text}>ברוך הבא, {user?.username}</Text>
+      <Text style={styles.text}>gggggggggg הבא, {user?.username}</Text>
       <Text style={styles.text}>תפקיד: {user?.role}</Text>
-      <Button title="התנתק" onPress={() => dispatch(logout())} /> */}
-
-
-        <Text style={styles.text}>זה דף הבית לא צריך להיות פה לא מגיעים אליו </Text>
+      <Button title="התנתק" onPress={() => dispatch(logout())} />
     </View>
   );
 }
